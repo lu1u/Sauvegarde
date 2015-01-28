@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sauvegarde</string>
+    <string name="non_connecte_wifi">Non connecté au WIFI: sauvegarde annulée</string>
+    
+    <string name="compte_mail_envoi">Compte mail pour l\'envoi</string>
+    <string name="infos_compte_incorrectes">Informations de compte incorrectes</string>
+    <string name="debut_sauvegarde">Début de la sauvegarde</string>
+    <string name="sauvegarde_terminee">Sauvegarde terminée</string>
+    <string name="sauvegarde_contacts">Contacts</string>
+    <string name="sauve_sms">Messages SMS</string>
+    <string name="sauve_mms">Messages MMS</string>
+    <string name="sauve_photos">Photos</string>
+    <string name="sauve_videos">Vidéos</string>
+    <string name="sauvegarde_auto_desactivee">Sauvegarde automatique désactivée</string>
+    <string name="sauvegarde_auto_programmee">Prochaine sauvegarde: %s</string>
+    <string name="lancement_sauvegarde">Lancement de la sauvegarde</string>
+    <string name="pas_de_nouveau_contact">Pas de nouveau contact à sauvegarder</string>
+    <string name="pas_de_nouveau_sms">Pas de nouveau SMS à sauvegarder</string>
+    <string name="pas_de_nouveau_mms">Pas de nouveau MMS à sauvegarder</string>
+    <string name="pas_de_nouvelle_photo">Pas de nouvelle photo à sauvegarder</string>
+    <string name="pas_de_nouvelle_video">Pas de nouveau vidéo à sauvegarder</string>
+    <string name="sauvegarde_ignoree_contact">La sauvegarde des contacts est ignorée</string>
+    <string name="sauvegarde_ignoree_sms">La sauvegarde des SMS est ignorée</string>
+    <string name="sauvegarde_ignoree_mms">La sauvegarde des MMS est ignorée</string>
+    <string name="sauvegarde_ignoree_photos">La sauvegarde des photos est ignorée</string>
+    <string name="sauvegarde_ignoree_videos">La sauvegarde des vidéos est ignorée</string>
+    <string name="sauvegardes_contact">%d contacts sauvegardés</string>
+    <string name="sauvegardes_sms">%d SMS sauvegardés</string>
+    <string name="sauvegardes_mms">%d MMS sauvegardés</string>
+    <string name="sauvegardes_photos">%d photos sauvegardées</string>
+    <string name="sauvegardes_videos">%d vidéos sauvegardées</string>
+    <string name="sauvegarde_annulee">Sauvegarde annulée</string>
+    <string name="sauvegarde_en_cours_contact">Sauvegarde du contact %1$d / %2$d</string>
+    <string name="sauvegarde_en_cours_sms">Sauvegarde du message %1$d / %2$d</string>
+    <string name="sauvegarde_en_cours_mms">Sauvegarde du message %1$d / %2$d</string>
+    <string name="sauvegarde_en_cours_photo">Sauvegarde de la photo %1$d / %2$d</string>
+    <string name="sauvegarde_en_cours_video">Sauvegarde de la vidéo %1$d / %2$d</string>
+	<string name="sujet_contact">[Sauvegarde Auto] Contacts</string>
+	<string name="sujet_sms_recu">[Sauvegarde Auto] SMS reçu de %s</string>
+	<string name="sujet_sms_envoye">[Sauvegarde Auto] SMS envoyé à %s</string>
+	<string name="sujet_mms_recu">[Sauvegarde Auto] MMS reçu de %s</string>
+	<string name="sujet_mms_envoye">[Sauvegarde Auto] MMS envoyé à %s</string>
+	<string name="sujet_sms_inconnu">[Sauvegarde Auto] SMS %s</string>
+	<string name="sujet_mms_inconnu">[Sauvegarde Auto] MMS %s</string>
+	<string name="sujet_photo">[Sauvegarde Auto] Photo %s</string>
+	<string name="sujet_video">[Sauvegarde Auto] Vidéo %s</string>
+	<string name="message_fin_mail">\nCe mail vous a été envoyé par l\'application android Sauvegarde.\n&#169;Lucien Pilloni 2015</string>
+	<string name="envoi_contacts">Envoi du mail des contacts&#8230;</string>
+	<string name="mms_addresse">Adresse: %s\n</string>
+	<string name="mms_date">Date: %s\n</string>
+	<string name="mms_filename">MMS_Part_%1$s.%2$s</string>
+	<string name="mail_nom_photo">Nom %s\n</string>
+	<string name="mail_nom_video">Nom %s\n</string>
+	
+	<string name="mail_description_photo">Description %s\n</string>
+	<string name="mail_description_video">Description %s\n</string>
+	
+	<string name="mail_date_taken_photo">Date de prise de vue %s\n</string>
+	<string name="mail_date_taken_video">Date de prise de vue %s\n</string>
+	
+	<string name="mail_date_added_photo">Date d\'ajout %s\n</string>
+	<string name="mail_date_added_video">Date d\'ajout %s\n</string>
+	
+	<string name="mail_date_modified_photo">Date de modification %s\n</string>
+	<string name="mail_date_modified_video">Date de modification %s\n</string>
+	
+	<string name="sms_body">Date: %1$s\n%2$s\n%3$s</string>
+	
+	
+	<string name="btn_annuler">Annuler sauvegarde</string>
+	<string name="btn_sauver_maintenant">Sauver maintenant</string>
+	
+	<string name="derniere_sauvegarde">Dernière sauvegarde: %s</string>
+	
+	<string name="reinit_dates">Toutes les dates de sauvegarde ont été réinitialisées.</string>
+	<string name="reinit_params">Tous les parametres ont été remis à leurs par défaut.</string>
+</resources>
