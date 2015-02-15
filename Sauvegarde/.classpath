@@ -5,8 +5,8 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="D:/UtilisateursW8/lucien/ProjetsAndroid/Sauvegarde/libs/activation.jar"/>
-	<classpathentry kind="lib" path="D:/UtilisateursW8/lucien/ProjetsAndroid/Sauvegarde/libs/additionnal.jar"/>
-	<classpathentry kind="lib" path="D:/UtilisateursW8/lucien/ProjetsAndroid/Sauvegarde/libs/mail.jar"/>
+	<classpathentry kind="lib" path="D:/UtilisateursW8/lucien/git/Sauvegarde/Sauvegarde/libs/activation.jar"/>
+	<classpathentry kind="lib" path="D:/UtilisateursW8/lucien/git/Sauvegarde/Sauvegarde/libs/additionnal.jar"/>
+	<classpathentry kind="lib" path="D:/UtilisateursW8/lucien/git/Sauvegarde/Sauvegarde/libs/mail.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

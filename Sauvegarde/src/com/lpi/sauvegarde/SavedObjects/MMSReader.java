@@ -26,6 +26,7 @@ public class MMSReader extends SavedObjectReader
 	{ COL_ID, COL_DATE };
 
 	private int _colonneId;
+	private int _colonneDate ;
 
 	public MMSReader(Context c, long depuis)
 	{
@@ -34,6 +35,7 @@ public class MMSReader extends SavedObjectReader
 				null, COL_DATE + " ASC")); //$NON-NLS-1$
 
 		_colonneId = _cursor.getColumnIndexOrThrow(COL_ID);
+		_colonneDate = _cursor.getColumnIndexOrThrow(COL_DATE);
 	}
 
 	public SavedObject currentObject()
@@ -44,15 +46,15 @@ public class MMSReader extends SavedObjectReader
 		// Construire un SMS a partir des infos de la base
 		String id = _cursor.getString(_colonneId);
 		MMS message = new MMS();
-		message._date = _cursor.getLong(_cursor.getColumnIndex(COL_DATE)) ;
+		message._date = _cursor.getLong(_colonneDate) ;
 		message._adresse = getAddressNumber(id) ;
 		
-		String selectionPart = "mid=" + id ; //$NON-NLS-1$
-		Uri uri = Uri.parse("content://mms/part"); //$NON-NLS-1$
 		Cursor cursor = null;
 
 		try
 		{
+			String selectionPart = "mid=" + id ; //$NON-NLS-1$
+			Uri uri = Uri.parse("content://mms/part"); //$NON-NLS-1$
 			cursor = _context.getContentResolver().query(uri, null, selectionPart, null, null);
 			while (cursor.moveToNext())
 				message.addParts(cursor);				

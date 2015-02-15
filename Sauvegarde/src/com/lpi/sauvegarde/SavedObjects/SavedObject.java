@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.PhoneLookup;
 
+import com.lpi.sauvegarde.R;
 import com.lpi.sauvegarde.Mail.Mail;
 
 /**
@@ -22,6 +23,7 @@ public abstract class SavedObject
 			{ PhoneLookup.DISPLAY_NAME };
 
 	abstract public void construitMail( Context c, Mail  m ) throws Exception ;
+	abstract public String identification(Context c) ;
 	
 	/***
 	 * Traitements a faire une fois que l'objet a ete envoye par mail
@@ -42,6 +44,28 @@ public abstract class SavedObject
 		}
 	}
 	
+	/***
+	 * Converti en texte une valeur representant une duree en secondes
+	 * @param context
+	 * @param l
+	 * @return
+	 */
+	public static String sqliteDurationToString(Context context, long l)
+	{
+		try
+		{
+			int secondes = (int)l % 60 ;
+			l /= 60 ;
+			int minutes = (int)l % 60 ;
+			l /= 60 ;
+			int heures = (int)l ;
+			
+			return SavedObjectReader.getResourceString(R.string.duration, heures, minutes, secondes ) ;
+		} catch (Exception e)
+		{
+			return l + " (format de date non reconnue)" ; //$NON-NLS-1$
+		}
+	}
 		
 	/**
 	 * Essaie de retrouver le nom d'un contact a partir de son numero de telephone
@@ -83,5 +107,7 @@ public abstract class SavedObject
 		String strFormat = "Inconnu %s"; //$NON-NLS-1$
 		return String.format(strFormat, numero);
 	}
+
+
 
 }

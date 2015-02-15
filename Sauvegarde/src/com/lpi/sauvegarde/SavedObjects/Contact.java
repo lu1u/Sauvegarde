@@ -17,8 +17,6 @@ public class Contact extends SavedObject
 	public long _lastContacted;
 	public long _timesContacted ;
 
-	// public ArrayList<String> Numeros = new ArrayList<String>();
-	// public ArrayList<String> EMails = new ArrayList<String>();
 	public String[] _numeros;
 	public String[] _eMails;
 
@@ -27,6 +25,11 @@ public class Contact extends SavedObject
 	{
 	}
 
+	@Override
+	public String identification(Context c)
+	{
+		return _nom ;
+	}
 	/**
 	 * Ajoute le texte correspondant a ce contact
 	 * @param s
@@ -63,35 +66,4 @@ public class Contact extends SavedObject
 
 		s.append("\n");
 	}
-
-	/***
-	 * Retrouve les informations de tous les contacts Inspire de
-	 * http://tausiq.wordpress.com/2012/08/23/android-get-contact-details-id-name-phone-photo/
-	 * 
-	 * @param context
-	 * @return
-	 */
-	/*
-	 * @SuppressWarnings("nls") static public ArrayList<Contact> getContacts(Context context) {
-	 * ArrayList<Contact> listecontacts = new ArrayList<Contact>(); Cursor cursor =
-	 * context.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null,
-	 * null); while (cursor.moveToNext()) { Contact contact = new Contact(); String contact_id =
-	 * cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID)); contact.Nom =
-	 * cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)); int
-	 * hasPhoneNumber = Integer.parseInt(cursor.getString(cursor
-	 * .getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))); if (hasPhoneNumber > 0) { //
-	 * Numeros de telephone Cursor phoneCursor = context.getContentResolver().query(
-	 * ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-	 * ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[] { contact_id },
-	 * null); while (phoneCursor.moveToNext()) contact.Numeros.add(phoneCursor.getString(phoneCursor
-	 * .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))); phoneCursor.close(); } //
-	 * Adresses mail Cursor emailCursor =
-	 * context.getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null,
-	 * ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?", new String[] { contact_id },
-	 * null); while (emailCursor.moveToNext()) contact.EMails.add(emailCursor.getString(emailCursor
-	 * .getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))); emailCursor.close(); // On
-	 * n'ajoute que les contacts qui ont des numeros de telephone ou un email if
-	 * (contact.Numeros.size() > 0 || (contact.EMails.size() > 0)) listecontacts.add(contact); }
-	 * cursor.close(); return listecontacts; }
-	 */
 }

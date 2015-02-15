@@ -73,7 +73,7 @@ public class SauvegardeAuto extends AsyncTask<Void, Void, Void>  implements Prog
 	protected Void doInBackground(Void... params)
 	{
 		Sauvegarde sauve = new Sauvegarde(_context, this) ;
-		sauve.execute(Sauvegarde.TYPE_LAUNCHED.MANUEL);
+		sauve.execute(null, Sauvegarde.TYPE_LAUNCHED.MANUEL);
 		return null;
 	}
 	

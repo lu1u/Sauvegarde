@@ -36,6 +36,11 @@ public class SMS extends SavedObject
 
 	SMSType _type;
 
+	@Override
+	public String identification(Context c)
+	{
+		return _adresse + ' ' + sqliteDateToString(c, _date) ;
+	}
 	
 	private void setSubject(Context context, Mail m) throws Exception
 	{

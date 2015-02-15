@@ -52,6 +52,11 @@ public class MMS extends SavedObject
 	private Vector<MMSPart> _donnees = new Vector<MMSPart>();
 	private List<String> _fichiersTemporaires = new LinkedList<String>();
 
+	@Override
+	public String identification(Context c)
+	{
+		return _adresse + ' ' +  sqliteDateToString(c, _date) ;
+	}
 	private void setSubject(Context context, Mail m)
 	{
 		m.setSubject(SavedObjectReader.getResourceString(R.string.sujet_mms_inconnu,getContactFromNumber( context, _adresse)));

@@ -11,7 +11,7 @@ import com.lpi.sauvegarde.R;
 public class SauvegardeManuelle extends AsyncTask<Void, Void, Void> implements ProgressDlg
 {
 	private ProgressDialog dialog;
-	private Context _context ;
+	private MainActivity _mainActivity ;
 	private String _message ;
 	private boolean _canceled ;
 	
@@ -19,18 +19,18 @@ public class SauvegardeManuelle extends AsyncTask<Void, Void, Void> implements P
 	{
 		_canceled = false ;
 		dialog = new ProgressDialog(activity);
-		_context = activity ;
+		_mainActivity = activity ;
 	}
 
 	@Override
 	protected void onPreExecute()
 	{
-		dialog.setTitle(_context.getResources().getString(R.string.app_name));
+		dialog.setTitle(_mainActivity.getResources().getString(R.string.app_name));
 		dialog.setMessage(""); //$NON-NLS-1$
 		dialog.setIndeterminate(false);
 		dialog.setCancelable(true);
 		dialog.setMax(1000);
-		dialog.setButton(ProgressDialog.BUTTON_NEUTRAL, _context.getResources().getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
+		dialog.setButton(ProgressDialog.BUTTON_NEUTRAL, _mainActivity.getResources().getString(android.R.string.cancel), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
@@ -54,8 +54,8 @@ public class SauvegardeManuelle extends AsyncTask<Void, Void, Void> implements P
 	@Override
 	protected Void doInBackground(Void... params)
 	{
-		Sauvegarde sauve = new Sauvegarde(_context, this) ;
-		sauve.execute(Sauvegarde.TYPE_LAUNCHED.MANUEL);
+		Sauvegarde sauve = new Sauvegarde(_mainActivity, this) ;
+		sauve.execute(_mainActivity, Sauvegarde.TYPE_LAUNCHED.MANUEL);
 		return null;
 	}
 
@@ -102,7 +102,7 @@ public class SauvegardeManuelle extends AsyncTask<Void, Void, Void> implements P
 	@Override
 	public void notification(int i, Object... args)
 	{
-		_message = String.format(_context.getResources().getString(i), args);
+		_message = String.format(_mainActivity.getResources().getString(i), args);
 		publishProgress();
 	}
 

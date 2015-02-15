@@ -43,7 +43,8 @@
                 <TableRow
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="fill" >
 
                     <CheckBox
                         android:id="@+id/checkBoxContacts"
@@ -51,6 +52,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
                         android:text="Contacts" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxJournalTelephone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="Appels" />
 
                 </TableRow>
 
@@ -66,6 +74,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
+                        android:longClickable="true"
                         android:text="SMS" />
 
                     <CheckBox
@@ -73,6 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.5"
+                        android:longClickable="true"
                         android:text="MMS" />
 
                 </TableRow>
@@ -86,6 +96,7 @@
                         android:id="@+id/checkBoxPhotos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:longClickable="true"
                         android:layout_weight="0.5"
                         android:text="Photos" />
 
@@ -93,6 +104,7 @@
                         android:id="@+id/checkBoxVideo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:longClickable="true"
                         android:layout_weight="0.5"
                         android:text="Vidéos" />
 

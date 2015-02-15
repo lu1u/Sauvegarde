@@ -81,7 +81,4 @@ public class SMSReader extends SavedObjectReader
 		editor.putLong(Sauvegarde.PREF_DERNIERE_SAUVEGARDE_SMS, now);
 		editor.commit();
 	}
-	
-	
-
 }

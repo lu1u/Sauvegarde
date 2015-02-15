@@ -11,6 +11,7 @@
     <string name="sauvegarde_contacts">Contacts</string>
     <string name="sauve_sms">Messages SMS</string>
     <string name="sauve_mms">Messages MMS</string>
+   <string name="sauve_appels">Messages appels téléphoniques</string>
     <string name="sauve_photos">Photos</string>
     <string name="sauve_videos">Vidéos</string>
     <string name="sauvegarde_auto_desactivee">Sauvegarde automatique désactivée</string>
@@ -22,6 +23,7 @@
     <string name="pas_de_nouvelle_photo">Pas de nouvelle photo à sauvegarder</string>
     <string name="pas_de_nouvelle_video">Pas de nouveau vidéo à sauvegarder</string>
     <string name="sauvegarde_ignoree_contact">La sauvegarde des contacts est ignorée</string>
+    <string name="sauvegarde_ignoree_appels">La sauvegarde des appels est ignorée</string>
     <string name="sauvegarde_ignoree_sms">La sauvegarde des SMS est ignorée</string>
     <string name="sauvegarde_ignoree_mms">La sauvegarde des MMS est ignorée</string>
     <string name="sauvegarde_ignoree_photos">La sauvegarde des photos est ignorée</string>
@@ -44,7 +46,7 @@
 	<string name="sujet_mms_envoye">[Sauvegarde Auto] MMS envoyé à %s</string>
 	<string name="sujet_sms_inconnu">[Sauvegarde Auto] SMS %s</string>
 	<string name="sujet_mms_inconnu">[Sauvegarde Auto] MMS %s</string>
-	<string name="sujet_photo">[Sauvegarde Auto] Photo %s</string>
+	<string name="sujet_photo">[Sauvegarde Auto] Photo %1$s, %2$s</string>
 	<string name="sujet_video">[Sauvegarde Auto] Vidéo %s</string>
 	<string name="message_fin_mail">\nCe mail vous a été envoyé par l\'application android Sauvegarde.\n&#169;Lucien Pilloni 2015</string>
 	<string name="envoi_contacts">Envoi du mail des contacts&#8230;</string>
@@ -76,4 +78,10 @@
 	
 	<string name="reinit_dates">Toutes les dates de sauvegarde ont été réinitialisées.</string>
 	<string name="reinit_params">Tous les parametres ont été remis à leurs par défaut.</string>
+	
+	<string name="sujet_calllog_incoming">[Sauvegarde Auto] Appel entrant de %s</string>
+	<string name="sujet_calllog_outgoing">[Sauvegarde Auto] Appel sortant à %s</string>	
+	<string name="sujet_calllog_unkown">[Sauvegarde Auto] Appel %s</string>
+	<string name="appel_body">Date: %1$s\nDurée: %2$s\n%3$s</string>
+	<string name="duration">%1$02dh %2$02dm %3$02ds</string>
 </resources>

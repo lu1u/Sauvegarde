@@ -29,8 +29,8 @@ public class AlarmReceiver extends BroadcastReceiver
 		{
 			lanceSauvegardeAuto(context) ;
 			
-		} else if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())
-				|| "android.intent.action.QUICKBOOT_POWERON".equals(intent.getAction()))
+		} else if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction()) //$NON-NLS-1$
+				|| "android.intent.action.QUICKBOOT_POWERON".equals(intent.getAction())) //$NON-NLS-1$
 		{
 
 			Plannificateur plannificateur = new Plannificateur(context) ;

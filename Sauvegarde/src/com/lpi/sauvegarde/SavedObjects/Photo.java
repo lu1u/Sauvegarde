@@ -22,9 +22,15 @@ public class Photo extends SavedObject
 	public long _dateTaken, _dateAdded, _dateModified;
 
 	@Override
+	public String identification(Context c)
+	{
+		return _displayName + ' ' + _absolutePath + ' ' + sqliteDateToString(c, _dateModified) ;
+	}
+	
+	@Override
 	public void construitMail(Context c, Mail m) throws Exception
 	{
-		m.setSubject(SavedObjectReader.getResourceString(R.string.sujet_photo, _displayName));
+		m.setSubject(SavedObjectReader.getResourceString(R.string.sujet_photo, _displayName, sqliteDateToString(c, _dateTaken)) );
 
 		StringBuilder b = new StringBuilder();
 		b.append(SavedObjectReader.getResourceString(R.string.mail_nom_photo, _displayName));

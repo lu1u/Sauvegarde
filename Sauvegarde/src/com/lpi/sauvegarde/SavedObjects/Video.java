@@ -30,15 +30,10 @@ public class Video extends SavedObject
 			
 			StringBuilder b = new StringBuilder() ;
 			b.append( SavedObjectReader.getResourceString( R.string.mail_nom_video ,_displayName)) ;
-			
 			b.append( SavedObjectReader.getResourceString( R.string.mail_description_video, _description)) ;
-			
 			b.append( SavedObjectReader.getResourceString( R.string.mail_date_taken_video, sqliteDateToString(c, _dateTaken))) ;
-			
 			b.append( SavedObjectReader.getResourceString( R.string.mail_date_added_video, sqliteDateToString(c, _dateAdded))) ;
-			
 			b.append( SavedObjectReader.getResourceString( R.string.mail_date_added_video, sqliteDateToString(c, _dateModified))) ;
-			
 			b.append(SavedObjectReader.getResourceString(R.string.message_fin_mail )) ;
 			
 			m.setBody(b.toString());
@@ -47,6 +42,12 @@ public class Video extends SavedObject
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public String identification(Context c)
+	{
+		return _displayName + ' ' + _absolutePath + ' ' + sqliteDateToString(c, _dateModified) ; 
 	}
 	/* (non-Javadoc)
 	 * @see com.lpi.sauvegarde.SavedObjects.SavedObject#confirmeEnvoi(android.content.Context)

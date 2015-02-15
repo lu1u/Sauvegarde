@@ -38,7 +38,6 @@ public class MainActivity extends Activity
 	private boolean _sauvegardeEnCours;
 	private TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
 
-		@SuppressWarnings("boxing")
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute)
 		{
@@ -206,10 +205,12 @@ public class MainActivity extends Activity
 		if (date != 0)
 		{
 			String sDate = Report.getLocalizedDate(date);
-			//Toast.makeText(this,
-			//		String.format(getResources().getString(R.string.derniere_sauvegarde), sDate), Toast.LENGTH_SHORT).show();
+			// Toast.makeText(this,
+			// String.format(getResources().getString(R.string.derniere_sauvegarde), sDate),
+			// Toast.LENGTH_SHORT).show();
 
-			CustomToast.Show(this, String.format(getResources().getString(R.string.derniere_sauvegarde), sDate), Toast.LENGTH_SHORT);
+			CustomToast.Show(this, String.format(getResources().getString(R.string.derniere_sauvegarde), sDate),
+					Toast.LENGTH_SHORT);
 			((TextView) findViewById(R.id.textViewDerniereSauvegarde)).setText(String.format(
 					getResources().getString(R.string.derniere_sauvegarde), sDate));
 		}
@@ -224,6 +225,10 @@ public class MainActivity extends Activity
 		// Contacts
 		((CheckBox) findViewById(R.id.checkBoxContacts))
 				.setChecked(settings.getBoolean(Sauvegarde.PREF_CONTACTS, true));
+
+		// Journal Telephonique
+		((CheckBox) findViewById(R.id.checkBoxJournalTelephone)).setChecked(settings.getBoolean(
+				Sauvegarde.PREF_JOURNAL_TELEPHONE, true));
 
 		// SMS
 		((CheckBox) findViewById(R.id.checkBoxSMS)).setChecked(settings.getBoolean(Sauvegarde.PREF_SMS, true));
@@ -253,7 +258,7 @@ public class MainActivity extends Activity
 		{
 			int heure = settings.getInt(Sauvegarde.PREF_SAUVEGARDE_AUTO_HEURE, 10);
 			int minute = settings.getInt(Sauvegarde.PREF_SAUVEGARDE_AUTO_MINUTE, 0);
-			buttonHeure.setText(String.format("%d:%02d", heure, minute));
+			buttonHeure.setText(String.format("%d:%02d", heure, minute)); //$NON-NLS-1$
 			((TextView) findViewById(R.id.textViewProchaineSauvegarde)).setText(Sauvegarde.formatResourceString(this,
 					R.string.sauvegarde_auto_programmee, Sauvegarde.getLocalizedTimeAndDate(this, cal)));
 		}
@@ -283,7 +288,7 @@ public class MainActivity extends Activity
 		{
 			int heure = settings.getInt(Sauvegarde.PREF_SAUVEGARDE_AUTO_HEURE, 10);
 			int minute = settings.getInt(Sauvegarde.PREF_SAUVEGARDE_AUTO_MINUTE, 0);
-			buttonHeure.setText(String.format("%d:%02d", heure, minute));
+			buttonHeure.setText(String.format("%d:%02d", heure, minute)); //$NON-NLS-1$
 			((TextView) findViewById(R.id.textViewProchaineSauvegarde)).setText(Sauvegarde.formatResourceString(this,
 					R.string.sauvegarde_auto_programmee, Sauvegarde.getLocalizedTimeAndDate(this, cal)));
 		}
@@ -300,12 +305,14 @@ public class MainActivity extends Activity
 		editor.putString(Sauvegarde.PREF_DESTADDRESS, ((AutoCompleteTextView) findViewById(R.id.editTextDestAddress))
 				.getText().toString());
 		editor.putBoolean(Sauvegarde.PREF_CONTACTS, ((CheckBox) findViewById(R.id.checkBoxContacts)).isChecked());
+		editor.putBoolean(Sauvegarde.PREF_JOURNAL_TELEPHONE, ((CheckBox) findViewById(R.id.checkBoxJournalTelephone)).isChecked());
 		editor.putBoolean(Sauvegarde.PREF_SMS, ((CheckBox) findViewById(R.id.checkBoxSMS)).isChecked());
 		editor.putBoolean(Sauvegarde.PREF_MMS, ((CheckBox) findViewById(R.id.checkBoxMMS)).isChecked());
 		editor.putBoolean(Sauvegarde.PREF_PHOTOS, ((CheckBox) findViewById(R.id.checkBoxPhotos)).isChecked());
 		editor.putBoolean(Sauvegarde.PREF_VIDEOS, ((CheckBox) findViewById(R.id.checkBoxVideo)).isChecked());
-		editor.putBoolean(Sauvegarde.PREF_SAUVEGARDE_AUTO_ACTIVEE,  ((CheckBox) findViewById(R.id.checkBoxSauvegardeAuto)).isChecked());
-		
+		editor.putBoolean(Sauvegarde.PREF_SAUVEGARDE_AUTO_ACTIVEE,
+				((CheckBox) findViewById(R.id.checkBoxSauvegardeAuto)).isChecked());
+
 		editor.commit();
 	}
 

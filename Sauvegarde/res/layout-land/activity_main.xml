@@ -1,192 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_margin="4dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/buttonSaveNow"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal" >
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="0.75"
+            android:background="@drawable/buttonshape_vert"
+            android:drawableBottom="@drawable/ic_stat_sauvegarde"
+            android:drawablePadding="4dp"
+            android:drawableTop="@drawable/ic_stat_sauvegarde"
+            android:onClick="onClickSaveNow"
+            android:padding="8dp"
+            android:text="@string/btn_sauver_maintenant" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_margin="4dp"
-                    android:orientation="vertical" >
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="0.25"
+            android:background="@drawable/buttonshape_rouge"
+            android:drawableBottom="@drawable/ic_action_avances"
+            android:drawableTop="@drawable/ic_action_avances"
+            android:onClick="onClickParametresAvances"
+            android:text="Paramètres..." />
+    </LinearLayout>
 
-                    <Button
-                        android:id="@+id/buttonSaveNow"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_weight="0.75"
-                        android:background="@drawable/buttonshape_vert"
-                        android:drawableBottom="@drawable/ic_stat_sauvegarde"
-                        android:drawablePadding="4dp"
-                        android:drawableTop="@drawable/ic_stat_sauvegarde"
-                        android:onClick="onClickSaveNow"
-                        android:padding="8dp"
-                        android:text="@string/btn_sauver_maintenant" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:orientation="vertical" >
 
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_weight="0.25"
-                        android:background="@drawable/buttonshape_rouge"
-                        android:drawableBottom="@drawable/ic_action_avances"
-                        android:drawableTop="@drawable/ic_action_avances"
-                        android:onClick="onClickParametresAvances"
-                        android:text="Paramètres..." />
+        <TextView
+            android:id="@+id/textViewDerniereSauvegarde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
-                </LinearLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="0.4"
+            android:background="@drawable/background" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:orientation="vertical" >
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
-                <TextView
-                    android:id="@+id/textViewDerniereSauvegarde"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-             <TableLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginBottom="8dp"
-                 android:layout_weight="0.4"
-                 android:background="@drawable/background" >
-
-                <TableRow
-                    android:id="@+id/tableRow1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <CheckBox
-                        android:id="@+id/checkBoxContacts"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="Contacts" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="fill"
-                    android:showDividers="middle" >
-
-                    <CheckBox
-                        android:id="@+id/checkBoxSMS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="SMS" />
-
-                    <CheckBox
-                        android:id="@+id/checkBoxMMS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="MMS" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
-
-                    <CheckBox
-                        android:id="@+id/checkBoxPhotos"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="Photos" />
-
-                    <CheckBox
-                        android:id="@+id/checkBoxVideo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="Vidéos" />
-
-                </TableRow>
-            </TableLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/background"
-                    android:orientation="vertical"
-                    android:padding="4dp" >
-
-                    <TextView
-                        android:id="@+id/textViewNotification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="(l&apos;adresse ou seront envoyés les mails)"
-                        android:text="Adresse de destination:"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <AutoCompleteTextView
-                        android:id="@+id/editTextDestAddress"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textEmailAddress" />
-
-                </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@drawable/background"
-      android:orientation="horizontal"
-      android:padding="4dp" >
-
-      <LinearLayout
-          android:layout_width="wrap_content"
-          android:layout_height="match_parent"
-          android:layout_weight="0.5"
-          android:orientation="vertical" >
-
-          <CheckBox
-              android:id="@+id/checkBoxSauvegardeAuto"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="0.5"
-              android:onClick="onClickSauvegardeAuto"
-              android:text="Planification quotidienne" />
-
-          <TextView
-              android:id="@+id/textViewProchaineSauvegarde"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="prochaine"
-              android:textAppearance="?android:attr/textAppearanceSmall" />
-
-      </LinearLayout>
-
-                <Button
-                    android:id="@+id/buttonHeure"
-                    style="?android:attr/buttonStyleSmall"
+                <CheckBox
+                    android:id="@+id/checkBoxContacts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
                     android:layout_weight="0.5"
-                    android:background="@drawable/buttonshape_bleu"
-                    android:onClick="onClickHeureSauvegarde"
-                    android:text="20:55" />
-            
-            </LinearLayout>
+                    android:text="Contacts" />
+            </TableRow>
 
-            </LinearLayout>
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill"
+                android:showDividers="middle" >
 
+                <CheckBox
+                    android:id="@+id/checkBoxSMS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:longClickable="false"
+                    android:text="SMS" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxMMS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:longClickable="false"
+                    android:text="MMS" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <CheckBox
+                    android:id="@+id/checkBoxPhotos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:longClickable="false"
+                    android:text="Photos" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:longClickable="true"
+                    android:text="Vidéos" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background"
+            android:orientation="vertical"
+            android:padding="4dp" >
+
+            <TextView
+                android:id="@+id/textViewNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="(l&apos;adresse ou seront envoyés les mails)"
+                android:text="Adresse de destination:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <AutoCompleteTextView
+                android:id="@+id/editTextDestAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background"
+            android:orientation="horizontal"
+            android:padding="4dp" >
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical" >
 
+                <CheckBox
+                    android:id="@+id/checkBoxSauvegardeAuto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:onClick="onClickSauvegardeAuto"
+                    android:text="Planification quotidienne" />
+
+                <TextView
+                    android:id="@+id/textViewProchaineSauvegarde"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="prochaine"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonHeure"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/buttonshape_bleu"
+                android:onClick="onClickHeureSauvegarde"
+                android:text="20:55" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

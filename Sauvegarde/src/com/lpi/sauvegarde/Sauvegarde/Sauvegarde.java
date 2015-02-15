@@ -2,10 +2,13 @@ package com.lpi.sauvegarde.Sauvegarde;
 
 import java.util.Calendar;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.NotificationCompat;
@@ -17,6 +20,8 @@ import com.lpi.sauvegarde.R;
 import com.lpi.sauvegarde.Report;
 import com.lpi.sauvegarde.Mail.Mail;
 import com.lpi.sauvegarde.Mail.MailInfo;
+import com.lpi.sauvegarde.SavedObjects.AppelTelephonique;
+import com.lpi.sauvegarde.SavedObjects.AppelTelephoniqueReader;
 import com.lpi.sauvegarde.SavedObjects.Contact;
 import com.lpi.sauvegarde.SavedObjects.ContactsReader;
 import com.lpi.sauvegarde.SavedObjects.MMSReader;
@@ -34,6 +39,7 @@ public class Sauvegarde
 	public static final String PREF_CONTACTS_ALL_VERSIONS = "Contacts.AllVersions"; //$NON-NLS-1$
 	public static final String PREF_DERNIERE_SAUVEGARDE = "DerniereSauvegarde"; //$NON-NLS-1$
 	public static final String PREF_DERNIERE_SAUVEGARDE_SMS = "SMS.DerniereSauvegarde"; //$NON-NLS-1$
+	public static final String PREF_DERNIERE_JOURNAL_TELEPHONE = "JournalTelephone.DerniereSauvegarde"; //$NON-NLS-1$
 	public static final String PREF_DERNIERE_SAUVEGARDE_MMS = "MMS.DerniereSauvegarde"; //$NON-NLS-1$
 	public static final String PREF_DERNIERE_SAUVEGARDE_PHOTOS = "Photos.DerniereSauvegarde"; //$NON-NLS-1$
 	public static final String PREF_DERNIERE_SAUVEGARDE_VIDEO = "Videos.DerniereSauvegarde"; //$NON-NLS-1$
@@ -41,6 +47,7 @@ public class Sauvegarde
 	public static final String PREF_FROMADDRESS = "FromAddress"; //$NON-NLS-1$
 	public static final String PREF_PASSWORD = "Password"; //$NON-NLS-1$
 	public static final String PREF_CONTACTS = "Contacts"; //$NON-NLS-1$
+	public static final String PREF_JOURNAL_TELEPHONE = "JournalTelephone"; //$NON-NLS-1$
 	public static final String PREF_SMS = "SMS"; //$NON-NLS-1$
 	public static final String PREF_MMS = "MMS"; //$NON-NLS-1$
 	public static final String PREF_PHOTOS = "Photos"; //$NON-NLS-1$
@@ -77,10 +84,19 @@ public class Sauvegarde
 		_dlg = dlg;
 	}
 
-	public void execute(TYPE_LAUNCHED type)
+	public void execute(Activity a, TYPE_LAUNCHED type)
 	{
-		// if (sauvegardeEnCours())
-		// return;
+		if (type == TYPE_LAUNCHED.MANUEL && a != null)
+		{
+			int current_orientation = _context.getResources().getConfiguration().orientation;
+			if (current_orientation == Configuration.ORIENTATION_LANDSCAPE)
+			{
+				a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+			} else
+			{
+				a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+			}
+		}
 
 		SharedPreferences settings = _context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
 		if (settings.getBoolean(PREF_WIFI, true))
@@ -105,16 +121,20 @@ public class Sauvegarde
 		sauveContacts(_context, settings, mInfo, report);
 		if (!_dlg.isCanceled())
 		{
-			sauveSMS(_context, settings, mInfo, report);
+			sauveAppels(_context, settings, mInfo, report);
 			if (!_dlg.isCanceled())
 			{
-				sauveMMS(_context, settings, mInfo, report);
+				sauveSMS(_context, settings, mInfo, report);
 				if (!_dlg.isCanceled())
 				{
-					sauvePhotos(_context, settings, mInfo, report);
+					sauveMMS(_context, settings, mInfo, report);
 					if (!_dlg.isCanceled())
 					{
-						sauveVideo(_context, settings, mInfo, report);
+						sauvePhotos(_context, settings, mInfo, report);
+						if (!_dlg.isCanceled())
+						{
+							sauveVideo(_context, settings, mInfo, report);
+						}
 					}
 				}
 			}
@@ -128,6 +148,11 @@ public class Sauvegarde
 		sendReport(report);
 		statusSauvegardeFinie(report);
 		sauvegardeEnCours(false);
+
+		if (type == TYPE_LAUNCHED.MANUEL && a != null)
+		{
+			a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+		}
 	}
 
 	/***
@@ -176,7 +201,6 @@ public class Sauvegarde
 	private void sendReport(Report report)
 	{
 		SharedPreferences settings = _context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
-
 		if (!settings.getBoolean(PREF_SEND_REPORT, false))
 			return;
 
@@ -195,7 +219,6 @@ public class Sauvegarde
 		{
 			e.printStackTrace();
 		}
-
 	}
 
 	/***
@@ -298,6 +321,32 @@ public class Sauvegarde
 			report.Log(report.SauvegardeSMS);
 		}
 	}
+	
+	/***
+	 * Sauve les appels telephoniques
+	 * 
+	 * @param context
+	 * @param settings
+	 * @param destMail
+	 * @param password
+	 * @param sMTP
+	 * @param port
+	 * @param report
+	 */
+	private void sauveAppels(Context context, SharedPreferences settings, MailInfo mInfo, Report report)
+	{
+		if (settings.getBoolean(PREF_JOURNAL_TELEPHONE, true))
+		{
+			report.Log("Sauvegarde des appels téléphoniques"); //$NON-NLS-1$
+			long derniereSauvegarde = settings.getLong(PREF_DERNIERE_JOURNAL_TELEPHONE, 0);
+			_dlg.setStage(formatResourceString(R.string.sauve_appels));
+			sauveObjects(context, mInfo, report, new AppelTelephoniqueReader(context, derniereSauvegarde));
+		} else
+		{
+			report.SauvegardeCallLog = formatResourceString(R.string.sauvegarde_ignoree_appels);
+			report.Log(report.SauvegardeSMS);
+		}
+	}
 
 	/***
 	 * Sauve les MMS
@@ -358,7 +407,7 @@ public class Sauvegarde
 				}
 
 				no++;
-				_dlg.setProgress( "%s/%s", no, total); //$NON-NLS-1$
+				_dlg.setProgress("%s/%s", no, total); //$NON-NLS-1$
 				SavedObject object = null;
 				try
 				{
@@ -369,10 +418,10 @@ public class Sauvegarde
 					m.send();
 				} catch (Exception e)
 				{
-					objectsReader.close();
+					// Erreur dans l'envoi de cet objet, on l'enregistre et on
+					// continue a sauvegarder les suivants
+					report.Log(object.identification(context));
 					report.Log(e);
-					return;
-
 				} finally
 				{
 					if (object != null)
@@ -432,7 +481,7 @@ public class Sauvegarde
 
 			no++;
 			if (no % 5 == 0)
-				_dlg.setProgress("%s/%s", no, total);
+				_dlg.setProgress("%s/%s", no, total); //$NON-NLS-1$
 
 			// On n'ajoute que les contacts qui ont des numeros de telephone ou un email
 			Contact c = objectReader.currentObject();
