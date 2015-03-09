@@ -3,7 +3,6 @@
  */
 package com.lpi.sauvegarde;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -25,6 +24,8 @@ public class Report
 	public String SauvegardePhotos = "";
 	public String SauvegardeVideos = "";
 	public String SauvegardeCallLog = "";
+	public boolean _erreurDetectee = false ;
+	
 	private List<String> log = new ArrayList<String>();
 
 	public String toString()
@@ -60,7 +61,8 @@ public class Report
 		Calendar c = Calendar.getInstance();
 		c.setTimeInMillis(date);
 
-		return String.format("%02d/%02d/%02d %02d:%02d:%02d", c.get(Calendar.DAY_OF_MONTH),
+		return String.format(Locale.getDefault(), "%02d/%02d/%02d %02d:%02d:%02d", 
+				c.get(Calendar.DAY_OF_MONTH),
 				(c.get(Calendar.MONTH) + 1), c.get(Calendar.YEAR), c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE),
 				c.get(Calendar.SECOND)); // + ":" + c.get(Calendar.MILLISECOND) ;
 	}

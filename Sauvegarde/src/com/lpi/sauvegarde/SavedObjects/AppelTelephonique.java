@@ -30,33 +30,34 @@ public class AppelTelephonique extends SavedObject
 	public void construitMail(Context c, Mail m) throws Exception
 	{
 		// Sujet
-		String adress = getContactFromNumber(c, _number) ;
+		String adresse = getContactFromNumber(c, _number) ;
 		switch( _type )
 		{
 		case CallLog.Calls.INCOMING_TYPE :
 		case CallLog.Calls.MISSED_TYPE :
 				m.setSubject(SavedObjectReader.getResourceString(R.string.sujet_calllog_incoming,
-							getContactFromNumber( c, _number)));
+						adresse));
 			break ;
 		case CallLog.Calls.OUTGOING_TYPE :
 			m.setSubject(SavedObjectReader.getResourceString(R.string.sujet_calllog_outgoing,
-							getContactFromNumber( c, _number)));
+					adresse));
 			break ;
 		default:
 			m.setSubject(SavedObjectReader.getResourceString(R.string.sujet_calllog_unkown,
-							getContactFromNumber( c, _number)));
+					adresse));
 			break ;
 		}
 		
 		// Corps du message
 		m.setBody(SavedObjectReader.getResourceString(R.string.appel_body,
+				adresse,
 				sqliteDateToString(c, _date), 
 				sqliteDurationToString(c, _duration),
 				SavedObjectReader.getResourceString(R.string.message_fin_mail)));
 	}
 
-	/* (non-Javadoc)
-	 * @see com.lpi.sauvegarde.SavedObjects.SavedObject#identification(android.content.Context)
+	/***
+	 * Retourne une chaine de caracteres qui permet d'identifier cet appel de facon unique
 	 */
 	@Override
 	public String identification(Context c)
@@ -65,8 +66,8 @@ public class AppelTelephonique extends SavedObject
 	}
 	
 
-	/* (non-Javadoc)
-	 * @see com.lpi.sauvegarde.SavedObjects.SavedObject#confirmeEnvoi(android.content.Context)
+	/***
+	 * Operation a effectuer quand le mail a ete envoye
 	 */
 	@Override
 	public void confirmeEnvoi(Context c)

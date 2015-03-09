@@ -52,7 +52,7 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="0.4"
             android:background="@drawable/background" >
@@ -68,6 +68,12 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:text="Contacts" />
+                 <CheckBox
+                        android:id="@+id/checkBoxJournalTelephone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="Appels" />
             </TableRow>
 
             <TableRow
@@ -166,7 +172,7 @@
                     android:id="@+id/textViewProchaineSauvegarde"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="prochaine"
+                    android:text=" "
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 

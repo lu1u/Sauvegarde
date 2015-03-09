@@ -4,11 +4,12 @@
 package com.lpi.sauvegarde.SavedObjects;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.provider.CallLog;
 
+import com.lpi.sauvegarde.R;
 import com.lpi.sauvegarde.Report;
+import com.lpi.sauvegarde.Sauvegarde.Sauvegarde;
 
 /**
  * @author lucien
@@ -55,63 +56,37 @@ public class AppelTelephoniqueReader extends SavedObjectReader
  		return appelTelephonique ;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.lpi.sauvegarde.SavedObjects.SavedObjectReader#remplitReport(com.lpi.sauvegarde.Report,
-	 * int)
-	 */
 	@Override
 	public void remplitReport(Report r, int NbSauvegardes)
 	{
-		// TODO Auto-generated method stub
-
+		r.SauvegardeVideos = getResourceString(R.string.sauvegardes_appels, Integer.valueOf(NbSauvegardes));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.lpi.sauvegarde.SavedObjects.SavedObjectReader#remplitReportPasDeNouveau(com.lpi.sauvegarde
-	 * .Report)
-	 */
 	@Override
 	public void remplitReportPasDeNouveau(Report report)
 	{
-		// TODO Auto-generated method stub
-
+		report.SauvegardeVideos = getResourceString(R.string.pas_de_nouveau_appel);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.lpi.sauvegarde.SavedObjects.SavedObjectReader#setDerniereSauvegarde(long)
-	 */
+	public String getNotificationMessage(int no, int total)
+	{
+		return getResourceString(R.string.sauvegarde_en_cours_appels, Integer.valueOf(no), Integer.valueOf(total));
+	}
+
+	public String getNotificationMessageFin(int total)
+	{
+		return getResourceString(R.string.sauvegardes_appels, Integer.valueOf(total));
+	}
+
 	@Override
 	public void setDerniereSauvegarde(long now)
 	{
-		// TODO Auto-generated method stub
-
+		SharedPreferences settings = _context.getSharedPreferences(Sauvegarde.PREFERENCES, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putLong(Sauvegarde.PREF_DERNIERE_JOURNAL_TELEPHONE, now);
+		editor.commit();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.lpi.sauvegarde.SavedObjects.SavedObjectReader#getNotificationMessage(int, int)
-	 */
-	@Override
-	public String getNotificationMessage(int no, int total)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.lpi.sauvegarde.SavedObjects.SavedObjectReader#getNotificationMessageFin(int)
-	 */
-	@Override
-	public String getNotificationMessageFin(int total)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

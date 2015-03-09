@@ -44,7 +44,7 @@ public class Photo extends SavedObject
 		b.append(SavedObjectReader.getResourceString(R.string.mail_date_added_photo,
 					sqliteDateToString(c, _dateAdded)));
 
-		b.append(SavedObjectReader.getResourceString(R.string.mail_date_added_photo,
+		b.append(SavedObjectReader.getResourceString(R.string.mail_date_modified_photo,
 					sqliteDateToString(c, _dateModified)));
 
 		b.append(SavedObjectReader.getResourceString(R.string.message_fin_mail));

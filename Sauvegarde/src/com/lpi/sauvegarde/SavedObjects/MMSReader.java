@@ -99,23 +99,23 @@ public class MMSReader extends SavedObjectReader
 	@Override
 	public void remplitReport(Report r, int NbSauvegardes)
 	{
-		r.SauvegardeMMS = getResourceString(R.string.sauvegardes_sms, Integer.valueOf(NbSauvegardes));
+		r.SauvegardeMMS = getResourceString(R.string.sauvegardes_mms, Integer.valueOf(NbSauvegardes));
 	}
 
 	@Override
 	public void remplitReportPasDeNouveau(Report report)
 	{
-		report.SauvegardeMMS = getResourceString(R.string.pas_de_nouveau_sms);
+		report.SauvegardeMMS = getResourceString(R.string.pas_de_nouveau_mms);
 	}
 
 	public String getNotificationMessage(int no, int total)
 	{
-		return getResourceString(R.string.sauvegarde_en_cours_sms, Integer.valueOf(no), Integer.valueOf(total));
+		return getResourceString(R.string.sauvegarde_en_cours_mms, Integer.valueOf(no), Integer.valueOf(total));
 	}
 
 	public String getNotificationMessageFin(int total)
 	{
-		return getResourceString(R.string.sauvegardes_sms, Integer.valueOf(total));
+		return getResourceString(R.string.sauvegardes_mms, Integer.valueOf(total));
 	}
 
 	@Override

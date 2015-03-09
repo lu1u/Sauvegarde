@@ -16,9 +16,9 @@
     <string name="sauve_videos">Vidéos</string>
     <string name="sauvegarde_auto_desactivee">Sauvegarde automatique désactivée</string>
     <string name="sauvegarde_auto_programmee">Prochaine sauvegarde: %s</string>
-    <string name="lancement_sauvegarde">Lancement de la sauvegarde</string>
     <string name="pas_de_nouveau_contact">Pas de nouveau contact à sauvegarder</string>
     <string name="pas_de_nouveau_sms">Pas de nouveau SMS à sauvegarder</string>
+     <string name="pas_de_nouveau_appel">Pas de nouveau appel à sauvegarder</string>
     <string name="pas_de_nouveau_mms">Pas de nouveau MMS à sauvegarder</string>
     <string name="pas_de_nouvelle_photo">Pas de nouvelle photo à sauvegarder</string>
     <string name="pas_de_nouvelle_video">Pas de nouveau vidéo à sauvegarder</string>
@@ -31,19 +31,19 @@
     <string name="sauvegardes_contact">%d contacts sauvegardés</string>
     <string name="sauvegardes_sms">%d SMS sauvegardés</string>
     <string name="sauvegardes_mms">%d MMS sauvegardés</string>
+    <string name="sauvegardes_appels">%d appels sauvegardés</string>
     <string name="sauvegardes_photos">%d photos sauvegardées</string>
     <string name="sauvegardes_videos">%d vidéos sauvegardées</string>
     <string name="sauvegarde_annulee">Sauvegarde annulée</string>
     <string name="sauvegarde_en_cours_contact">Sauvegarde du contact %1$d / %2$d</string>
     <string name="sauvegarde_en_cours_sms">Sauvegarde du message %1$d / %2$d</string>
     <string name="sauvegarde_en_cours_mms">Sauvegarde du message %1$d / %2$d</string>
+    <string name="sauvegarde_en_cours_appels">Sauvegarde de l\'appel %1$d / %2$d</string>
     <string name="sauvegarde_en_cours_photo">Sauvegarde de la photo %1$d / %2$d</string>
     <string name="sauvegarde_en_cours_video">Sauvegarde de la vidéo %1$d / %2$d</string>
 	<string name="sujet_contact">[Sauvegarde Auto] Contacts</string>
 	<string name="sujet_sms_recu">[Sauvegarde Auto] SMS reçu de %s</string>
 	<string name="sujet_sms_envoye">[Sauvegarde Auto] SMS envoyé à %s</string>
-	<string name="sujet_mms_recu">[Sauvegarde Auto] MMS reçu de %s</string>
-	<string name="sujet_mms_envoye">[Sauvegarde Auto] MMS envoyé à %s</string>
 	<string name="sujet_sms_inconnu">[Sauvegarde Auto] SMS %s</string>
 	<string name="sujet_mms_inconnu">[Sauvegarde Auto] MMS %s</string>
 	<string name="sujet_photo">[Sauvegarde Auto] Photo %1$s, %2$s</string>
@@ -82,6 +82,6 @@
 	<string name="sujet_calllog_incoming">[Sauvegarde Auto] Appel entrant de %s</string>
 	<string name="sujet_calllog_outgoing">[Sauvegarde Auto] Appel sortant à %s</string>	
 	<string name="sujet_calllog_unkown">[Sauvegarde Auto] Appel %s</string>
-	<string name="appel_body">Date: %1$s\nDurée: %2$s\n%3$s</string>
+	<string name="appel_body">%1$s\nDate: %2$s\nDurée: %3$s\n%4$s</string>
 	<string name="duration">%1$02dh %2$02dm %3$02ds</string>
 </resources>

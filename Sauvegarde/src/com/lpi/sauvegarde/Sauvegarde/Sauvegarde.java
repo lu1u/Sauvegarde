@@ -7,6 +7,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
@@ -20,7 +21,6 @@ import com.lpi.sauvegarde.R;
 import com.lpi.sauvegarde.Report;
 import com.lpi.sauvegarde.Mail.Mail;
 import com.lpi.sauvegarde.Mail.MailInfo;
-import com.lpi.sauvegarde.SavedObjects.AppelTelephonique;
 import com.lpi.sauvegarde.SavedObjects.AppelTelephoniqueReader;
 import com.lpi.sauvegarde.SavedObjects.Contact;
 import com.lpi.sauvegarde.SavedObjects.ContactsReader;
@@ -43,7 +43,7 @@ public class Sauvegarde
 	public static final String PREF_DERNIERE_SAUVEGARDE_MMS = "MMS.DerniereSauvegarde"; //$NON-NLS-1$
 	public static final String PREF_DERNIERE_SAUVEGARDE_PHOTOS = "Photos.DerniereSauvegarde"; //$NON-NLS-1$
 	public static final String PREF_DERNIERE_SAUVEGARDE_VIDEO = "Videos.DerniereSauvegarde"; //$NON-NLS-1$
-	public static final String PREF_SEND_REPORT = "SendReport"; //$NON-NLS-1$
+	public static final String PREF_RAPPORT = "Send.Report" ;//$NON-NLS-1$
 	public static final String PREF_FROMADDRESS = "FromAddress"; //$NON-NLS-1$
 	public static final String PREF_PASSWORD = "Password"; //$NON-NLS-1$
 	public static final String PREF_CONTACTS = "Contacts"; //$NON-NLS-1$
@@ -64,7 +64,10 @@ public class Sauvegarde
 	static final int NOTIFICATION_ID = 1;
 	static final long DELAI_MIN = 30 * 1000; // Delai en millisecondes entre deux sauvegardes
 												// programmees
-
+	public static final int RAPPORT_JAMAIS = 0 ;
+	public static final int RAPPORT_ERREUR = 1 ;
+	public static final int RAPPORT_TOUJOURS = 2 ;
+	
 	Context _context;
 	ProgressDlg _dlg;
 
@@ -200,16 +203,29 @@ public class Sauvegarde
 	 */
 	private void sendReport(Report report)
 	{
-		SharedPreferences settings = _context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
-		if (!settings.getBoolean(PREF_SEND_REPORT, false))
-			return;
+		boolean envoyer = false ; 
+		switch( LitPreferenceRapport(_context))
+		{
+		case RAPPORT_ERREUR :
+			envoyer = report._erreurDetectee ;
+			break ;
+			
+		case RAPPORT_TOUJOURS :
+			envoyer = true ;
+			break ;
+		default :
+			envoyer = false ;
+		}
+		
+		if ( ! envoyer )
+			return ;
 
+		SharedPreferences settings = _context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
 		MailInfo mInfo = new MailInfo();
 		mInfo.read(settings);
 
 		Mail m = new Mail(mInfo);
-		String[] toArr =
-		{ "lucien.pilloni@gmail.com" }; //$NON-NLS-1$
+		String[] toArr = { "lucien.pilloni@gmail.com" }; //$NON-NLS-1$
 		m.setTo(toArr);
 		report.FillMail(m);
 		try
@@ -236,6 +252,11 @@ public class Sauvegarde
 		return mWifi.isConnected();
 	}
 
+	/***
+	 * Retourne vrai si une sauvegarde est en cours
+	 * Info memorisee dans les preferences
+	 * @return
+	 */
 	public synchronized boolean sauvegardeEnCours()
 	{
 		SharedPreferences settings = _context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
@@ -420,6 +441,7 @@ public class Sauvegarde
 				{
 					// Erreur dans l'envoi de cet objet, on l'enregistre et on
 					// continue a sauvegarder les suivants
+					report._erreurDetectee = true ;
 					report.Log(object.identification(context));
 					report.Log(e);
 				} finally
@@ -505,6 +527,7 @@ public class Sauvegarde
 		{
 			Log.e(TAG, e.getLocalizedMessage());
 			Log.e(TAG, e.getStackTrace().toString());
+			report._erreurDetectee = true ;
 			report._message = "Erreur lors de l'envoi d\'un mail, vérifiez les paramètres"; //$NON-NLS-1$
 			report.Log("Erreur lors de l'envoi des contacts"); //$NON-NLS-1$
 			report.Log(e.getLocalizedMessage());
@@ -565,5 +588,19 @@ public class Sauvegarde
 				+ android.text.format.DateFormat.getTimeFormat(context).format(c.getTime());
 
 		return s;
+	}
+
+	public static void setPreferenceRapport(Context c, int rapport)
+	{
+		SharedPreferences settings = c.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+		Editor editor = settings.edit() ;
+		editor.putInt( PREF_RAPPORT, rapport ) ;
+		editor.commit() ;
+	}
+
+	public static int LitPreferenceRapport(Context c)
+	{
+		SharedPreferences settings = c.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+		return settings.getInt( PREF_RAPPORT, RAPPORT_JAMAIS) ;
 	}
 }
